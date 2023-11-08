@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Pharmacy Management System</title>
+</head>
+<body>
+    <header>
+        <h1>Pharmacy Management System</h1>
+    </header>
+    <main>
+        <section class="medicine-list">
+            <h2>Medicine Inventory</h2>
+            <ul id="medicine-inventory">
+                <!-- Medicine items will be added here using JavaScript -->
+            </ul>
+        </section>
+        <section class="order-form">
+            <label for="med">Medicine:</label>
+            <input type="text" id="med" placeholder="Enter medicine name" required>
+            <label for="qty">Quantity:</label>
+            <input type="text" id="qty" placeholder="Enter quantity" required><br><br>
+            <button onclick="addItem()">Add Medicine</button>
+        </section>
+    </main>
+    <script>
+        const medicineInventory = [];
+
+        // Add a new item to the list of medicines in the inventory
+        function addItem() {
+            const med = document.getElementById("med").value;
+            const qty = document.getElementById("qty").value;
+
+            if (med && qty) {
+                medicineInventory.push({ medicine: med, Quantity: qty });
+                document.getElementById('med').value = '';
+                document.getElementById('qty').value = '';
+                displayItems();
+            }
+        }
+
+        function displayItems() {
+            const medicineList = document.getElementById("medicine-inventory");
+            medicineList.innerHTML = ""; // Clear the list
+
+            medicineInventory.forEach((medicine) => {
+                const listItem = document.createElement("li");
+                listItem.textContent = `${medicine.medicine} - Quantity: ${medicine.Quantity}`;
+               medicineList.appendChild(listItem);
+            });
+        }
+
+        // Initial display when the page loads
+        displayItems();
+    </script>
+</body>
+</html>
